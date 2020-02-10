@@ -12,7 +12,6 @@ class WeatherForecast extends React.Component {
   }
 
   loadImage (iconCode) {
-    console.log("iconCode: ", iconCode)
     return (
       <Image source={{uri: `http://openweathermap.org/img/wn/${iconCode}@2x.png`}} style={styles.iconImage} />
     )
@@ -156,8 +155,7 @@ const styles = StyleSheet.create({
   head: {
     width: Dimensions.get('window').width,
     height: 40,
-    backgroundColor: '#f1f8ff',
-    textAlign: 'center',
+    backgroundColor: '#f1f8ff'
   },
   body: {
     width: Dimensions.get('window').width,
