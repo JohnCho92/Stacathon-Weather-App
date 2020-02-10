@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TextInput, StyleSheet, View, Dimensions } from 'react-native';
+import { Text, StyleSheet, View, Dimensions, Image } from 'react-native';
 import { connect } from 'react-redux';
 
 class CurrentWeather extends React.Component {
@@ -16,6 +16,7 @@ class CurrentWeather extends React.Component {
       return (
         <View style={styles.container}>
           <Text style={styles.name}>{this.props.cityWeather.name}</Text>
+          <Image source={{uri: this.props.icon}} style={styles.weatherIcon}/>
           <Text style={styles.weather}>{this.props.cityWeather.weather[0].main}</Text>
           <Text style={styles.temp}>Now: {Math.round((this.props.cityWeather.main.temp - 273.15) * 9/5 + 32) + ' ' + String.fromCharCode(176)}F</Text>
           <Text style={styles.humidity}>Humidity: {this.props.cityWeather.main.humidity} %</Text>
@@ -30,6 +31,7 @@ class CurrentWeather extends React.Component {
 const mapToState = (state) => {
   return {
     cityWeather: state.cityWeather.weather,
+    icon: state.cityWeather.icon,
     loading: state.cityWeather.loading
   }
 }
@@ -70,6 +72,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingBottom: 10
   },
+  weatherIcon: {
+    width: 100,
+    height: 100
+  }
 });
 
 export default CurrentWeatherContainer

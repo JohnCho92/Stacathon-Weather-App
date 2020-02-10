@@ -8,7 +8,7 @@ const initialForecastState = {
   loading: true
 }
 
-const getWeatherForecast = forecast => {
+const getWeatherForecast = (forecast) => {
   return {
     type: GET_WEATHER_FORECAST,
     forecast
@@ -18,7 +18,11 @@ const getWeatherForecast = forecast => {
 export const gotWeatherForecast = (city) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&mode=json&appid=e5a794f45b32f34f093b7b1683222e60`)
+      if (!process.env.REACT_APP_API_KEY) {
+        console.log('API KEY NOT FOUND')
+        require('../../secrets')
+      }
+      const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&mode=json&appid=${process.env.REACT_APP_API_KEY}`)
       if (data.cod === '404') {
         const error = new Error('city not found')
         error.status = 404

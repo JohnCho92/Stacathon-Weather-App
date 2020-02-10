@@ -18,24 +18,18 @@ const WeatherForecastRoute = () => (
   </View>
 );
 
-const WeatherMapRoute = () => (
-  <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
-);
-
 const initialLayout = { width: Dimensions.get('window').width };
 
 const WeatherTabView = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: 'currentWeather', title: 'Current Weather' },
-    { key: 'weatherForecast', title: 'Weather Forecast' },
-    { key: 'weatherMap', title: 'Weather Map' }
+    { key: 'weatherForecast', title: 'Weather Forecast' }
   ]);
 
   const renderScene = SceneMap({
     currentWeather: CurrentWeatherRoute,
     weatherForecast: WeatherForecastRoute,
-    weatherMap: WeatherMapRoute
   });
 
   return (
